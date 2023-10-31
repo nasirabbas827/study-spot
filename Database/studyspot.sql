@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2023 at 11:56 AM
+-- Generation Time: Oct 31, 2023 at 06:06 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -68,7 +68,8 @@ CREATE TABLE `course_creators` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `contact` varchar(255) NOT NULL,
-  `qualifications` text NOT NULL
+  `qualifications` text NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -205,14 +206,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `phone`, `age`, `profile_picture`) VALUES
-(5, 'basit', '$2y$10$u2fhgkm65xqsKIk.tGkun.AX4J2WdhwtC6qFjsY3AiBOea1dpRDsa', 'basit@gmail.com', '03176526827', 20, '65226de16d7ca.png'),
-(6, 'ahmad', '$2y$10$6RQybZvO2MXP2cWkFssy7Oo9mZdFIWSw3F4S96wwKftH6MIp9NlnC', 'ahmad@gmail.com', '03176526828', 20, '65196b07cc24f.png');
-
---
 -- Indexes for dumped tables
 --
 
@@ -319,7 +312,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `course_creators`
 --
 ALTER TABLE `course_creators`
-  MODIFY `creator_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `creator_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `course_pdfs`

@@ -28,13 +28,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($row = mysqli_fetch_assoc($result)) {
             // Verify the password
             if (password_verify($password, $row['password'])) {
-                // Authentication successful
-                $_SESSION["usertype"] = "creator";
-                $_SESSION["creator_id"] = $row['creator_id'];
-                $_SESSION["creator_name"] = $row['creator_name'];
+                // Check the status
+                if ($row['status'] === 'approved') {
+                    // Authentication successful
+                    $_SESSION["usertype"] = "creator";
+                    $_SESSION["creator_id"] = $row['creator_id'];
+                    $_SESSION["creator_name"] = $row['creator_name'];
 
-                header("Location: course_creator/creator_dashboard.php"); // Redirect to the creator's dashboard
-                exit;
+                    header("Location: course_creator/creator_dashboard.php"); // Redirect to the creator's dashboard
+                    exit;
+                } else {
+                    $error = "Your account is not yet approved. Please contact the administrator.";
+                }
             } else {
                 $error = "Invalid password";
             }
@@ -50,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($conn);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>

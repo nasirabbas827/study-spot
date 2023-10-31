@@ -12,12 +12,13 @@ if (!isset($_SESSION["usertype"]) || $_SESSION["usertype"] !== "admin") {
 if (isset($_GET['delete_id'])) {
     $deleteId = $_GET['delete_id'];
 
-    // You don't need to establish a database connection here since you included config.php
-
     $sql = "DELETE FROM course_creators WHERE creator_id = $deleteId";
 
     if (mysqli_query($conn, $sql)) {
         echo "Course creator deleted successfully.";
+        header("Location: view_course_creator.php");
+        exit();
+
     } else {
         echo "Error deleting course creator: " . mysqli_error($conn);
     }
@@ -50,7 +51,7 @@ include('admin_navbar.php');
 
     if (mysqli_num_rows($result) > 0) {
         echo '<table class="table">';
-        echo '<thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Contact</th><th>Qualifications</th><th>Action</th></tr></thead>';
+        echo '<thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Contact</th><th>Qualifications</th><th>Status</th><th>Action</th></tr></thead>';
         echo '<tbody>';
 
         while ($row = mysqli_fetch_assoc($result)) {
@@ -60,6 +61,7 @@ include('admin_navbar.php');
             echo '<td>' . $row['email'] . '</td>';
             echo '<td>' . $row['contact'] . '</td>';
             echo '<td>' . $row['qualifications'] . '</td>';
+            echo '<td>' . $row['status'] . '</td>';
             echo '<td>';
             echo '<a class="btn btn-primary" href="edit_creator.php?id=' . $row['creator_id'] . '">Edit</a> | ';
             echo '<a class="btn btn-danger" href="?delete_id=' . $row['creator_id'] . '">Delete</a>';

@@ -17,6 +17,7 @@
             } else {
                 echo '<li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>';
                 echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+                echo '<li class="nav-item"><a class="nav-link" href="course_creator_register.php">Course Creator Register</a></li>';
                 echo '<li class="nav-item"><a class="nav-link" href="creator_login.php">Course Creator Login</a></li>';
                 echo '<li class="nav-item"><a class="nav-link" href="./admin/admin_login.php">Admin Login</a></li>';
             }

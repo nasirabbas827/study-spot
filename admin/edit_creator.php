@@ -22,6 +22,7 @@ if (isset($_GET['id'])) {
         $email = $row['email'];
         $contact = $row['contact'];
         $qualifications = $row['qualifications'];
+        $status = $row['status']; // Fetch the status from the database
     } else {
         echo "Course creator not found.";
         exit;
@@ -37,13 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newEmail = $_POST["email"];
     $newContact = $_POST["contact"];
     $newQualifications = $_POST["qualifications"];
+    $newStatus = $_POST["status"]; // Get the new status from the form
 
     // Update the course creator data in the database
-    $updateSql = "UPDATE course_creators SET creator_name = ?, email = ?, contact = ?, qualifications = ? WHERE creator_id = ?";
+    $updateSql = "UPDATE course_creators SET creator_name = ?, email = ?, contact = ?, qualifications = ?, status = ? WHERE creator_id = ?";
     $stmt = mysqli_prepare($conn, $updateSql);
 
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ssssi", $newCreatorName, $newEmail, $newContact, $newQualifications, $creatorId);
+        mysqli_stmt_bind_param($stmt, "sssssi", $newCreatorName, $newEmail, $newContact, $newQualifications, $newStatus, $creatorId);
         
         if (mysqli_stmt_execute($stmt)) {
             echo "Course creator updated successfully.";
@@ -90,7 +92,15 @@ include('admin_navbar.php');
             <label for="qualifications">Qualifications:</label>
             <textarea class="form-control" id="qualifications" name="qualifications" rows="4" required><?php echo $qualifications; ?></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <div class="form-group">
+    <label for="status">Status:</label>
+    <select class="form-control" id="status" name="status" required>
+        <option value="pending" <?php echo ($status === 'pending') ? 'selected' : ''; ?>>Pending</option>
+        <option value="approved" <?php echo ($status === 'approved') ? 'selected' : ''; ?>>Approved</option>
+    </select>
+</div>
+
+        <button type="submit" class="mb-5 btn btn-primary">Update</button>
     </form>
 </div>
 

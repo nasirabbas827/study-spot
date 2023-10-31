@@ -9,7 +9,7 @@
         <a class="nav-link" href="update_admin.php">Update Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="view_course_creator.php">Add Course Creator</a>
+        <a class="nav-link" href="view_course_creator.php">Course Creators</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="view_teacher.php">Teachers</a>

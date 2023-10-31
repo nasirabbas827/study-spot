@@ -2,12 +2,6 @@
 session_start();
 include('config.php');
 
-// Check if the user is logged in as an admin
-if (!isset($_SESSION["usertype"]) || $_SESSION["usertype"] !== "admin") {
-    header("Location: admin_login.php");
-    exit;
-}
-
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get values from the form
@@ -34,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Bind parameters and execute the query
             mysqli_stmt_bind_param($stmt, "ssssss", $creatorName, $email, $password, $contact, $qualifications, $status);
             if (mysqli_stmt_execute($stmt)) {
-                echo "Course creator added successfully Status is Pending.";
+                echo "You are Registered Successfully Status is Pending Wait for Admin Approval";
             } else {
                 echo "Error: " . mysqli_error($conn);
             }
@@ -56,11 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Create Course Creator</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 <?php
-include('admin_navbar.php');
+include('navbar.php');
 ?>
 
 <div class="container mt-4">
@@ -104,8 +98,7 @@ include('admin_navbar.php');
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="view_course_creator.php" class="btn btn-secondary ml-2">View Course Creator</a>
+            <button type="submit" class="btn btn-primary">Register</button>
         </div>
     </div>
 </form>
